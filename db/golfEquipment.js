@@ -2,15 +2,12 @@
 // SDEV 372
 
 import mysql from 'mysql2/promise';
-import dotenv from 'dotenv';
 
-// Load environment variables from config file
-dotenv.config({
-    path: "./config.env"
-});
-
-// Destructure DB credentials from environment variables
-const { DB_HOST, DB_PORT, DB_DATABASE, DB_USER, DB_PASSWORD } = process.env;
+const DB_HOST = 'localhost';
+const DB_PORT = 3306;
+const DB_DATABASE = 'golf_equipment';
+const DB_USER = 'afarley';
+const DB_PASSWORD = 'F6CraKpFjfbIo1';
 
 // Establish connection to the MySQL database
 const connect = await mysql.createConnection({
