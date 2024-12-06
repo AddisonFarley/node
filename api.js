@@ -24,4 +24,4 @@ app.use("/api/v1/golf/balls", ballRouter);
 app.use("/api/v1/golf/clubs", clubRouter);
 
 //bind to a port and start server
-app.listen(4242, () => console.log(`Server started on port 4242`));
+app.listen(4242, '0.0.0.0', () => console.log(`Server started on port 4242`));
