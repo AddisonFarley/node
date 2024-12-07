@@ -1,39 +1,38 @@
 services:
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
-    restart: always
+  db:
+    image: mysql:latest
+    restart: on-failure
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: ARm0yB4Lq2RNeAG
       MYSQL_DATABASE: golf_equipment
       MYSQL_USER: afarley
       MYSQL_PASSWORD: F6CraKpFjfbIo1
-    ports:
-      - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    restart: always
+    image: phpmyadmin/phpmyadmin:latest
+    restart: on-failure
+    depends_on:
+      - db
     environment:
-      PMA_HOST: mysql
-      PMA_USER: afarley
-      PMA_PASSWORD: F6CraKpFjfbIo1
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: ARm0yB4Lq2RNeAG
     ports:
       - "8080:80"
 
   nodeapp:
     image: addisonfarley/node-app
     container_name: nodeapp
-    restart: always
+    restart: on-failure
     ports:
       - "4242:4242"
     depends_on:
-      - mysql
+      - db
     environment:
-      DB_HOST: mysql
+      DB_HOST: db
       DB_PORT: 3306
       DB_DATABASE: golf_equipment
       DB_USER: afarley

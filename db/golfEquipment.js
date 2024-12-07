@@ -3,21 +3,15 @@
 
 import mysql from 'mysql2/promise';
 
-const DB_HOST = 'localhost';
-const DB_PORT = 3306;
-const DB_DATABASE = 'golf_equipment';
-const DB_USER = 'afarley';
-const DB_PASSWORD = 'F6CraKpFjfbIo1';
-
 // Establish connection to the MySQL database
 const connect = await mysql.createConnection({
-    host: DB_HOST,
-    port: DB_PORT,
-    database: DB_DATABASE,
-    user: DB_USER,
-    password: DB_PASSWORD
+    host: process.env.DB_HOST || 'db',  
+    port: process.env.DB_PORT || 3306,  
+    database: process.env.DB_DATABASE || 'golf_equipment',
+    user: process.env.DB_USER || 'afarley',
+    password: process.env.DB_PASSWORD || 'F6CraKpFjfbIo1'
 });
-console.log(`Connected to MySQL on port ${DB_PORT}`);
+console.log("Connected to MySQL");
 
 // Golf Balls operations
 
